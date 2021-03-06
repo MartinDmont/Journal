@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'style.css')}}">
+    <title>Actu</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+        <div class="alert alert-danger" id="to_close">
+            <span class="close">{{message}} <small>Cliquez => disparait.</small></span>
+          </div>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+    <a href="/login">Se Connecter</a>
+    <h1>Quoi de neuf ici?</h1>
+        {% block content %}
+        <div class="truc">
+            {% for x in range(len): %}
+                <div class="flow">
+                    <p class="flowtitle">
+                        {{datas[x][1]}}
+                    </p>
+                    <p class="content">
+                        {{datas[x][2]}}
+                    </p>
+                    <p class="author">
+                        {{datas[x][3]}}
+                    </p>
+                    <p class="infos">
+                        <span class="info">
+                        <span class="info">{{datas[x][4]}}</span><span class="info">{{datas[x][5]}}<span class="icon">
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+        {% endblock %}
+</body>
+<script>
+    var closebtns = document.getElementsByClassName("close");
+var i;
+
+/* Loop through the elements, and hide the parent, when clicked on */
+for (i = 0; i < closebtns.length; i++) {
+  closebtns[i].addEventListener("click", function() {
+  this.parentElement.style.display = 'none';
+});}
+</script>
+</html>
